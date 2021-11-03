@@ -1,4 +1,4 @@
-package com.example.trainingtask2.model
+package com.example.trainingtask2.data.model
 
 data class Location(
     val name: String,
