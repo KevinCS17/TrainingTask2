@@ -1,6 +1,9 @@
 package com.example.trainingtask2.data.model
 
-data class Cartoon(
+import androidx.room.Entity
+
+@Entity
+data class CartoonModel(
     val info: Info,
     val results: List<Result>
 )
