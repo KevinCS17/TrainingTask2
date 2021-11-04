@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("character")
-    suspend fun fetchCartoonById(@Query("page_id") page_id : Int): CartoonResultModel
+    suspend fun fetchCartoonById(@Query("page_id") page_id : Int): CartoonModel
 }
