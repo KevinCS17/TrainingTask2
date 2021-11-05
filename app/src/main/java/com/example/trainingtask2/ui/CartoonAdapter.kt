@@ -20,17 +20,18 @@ import kotlinx.android.synthetic.main.cartoon_item.view.*
 import javax.inject.Inject
 
 class CartoonAdapter @Inject constructor(private val listener: ClickListener):
-    PagingDataAdapter<CartoonModel, CartoonAdapter.ViewHolder>(CartoonDiff){
+    PagingDataAdapter<Result, CartoonAdapter.ViewHolder>(CartoonDiff){
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.setOnClickListener {
-            listener.clicked(getItem(position)?.results?.get(position)?.id)
+            listener.clicked(getItem(position)?.id)
+            Log.d("test123", getItem(position)!!.id.toString())
         }
 
-        Glide.with(holder.itemView).load(getItem(position)?.results?.get(position)?.image)
+        Glide.with(holder.itemView).load(getItem(position)?.image)
             .into(holder.itemView.cartoon_poster)
     }
 
@@ -41,12 +42,12 @@ class CartoonAdapter @Inject constructor(private val listener: ClickListener):
         )
     }
 
-    object CartoonDiff : DiffUtil.ItemCallback<CartoonModel>() {
-        override fun areItemsTheSame(oldItem: CartoonModel, newItem: CartoonModel): Boolean =
-            oldItem.results[0].id == newItem.results[0].id
+    object CartoonDiff : DiffUtil.ItemCallback<Result>() {
+        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean =
+            oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: CartoonModel, newItem: CartoonModel): Boolean =
-            newItem == oldItem
+        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean =
+            oldItem == newItem
     }
     fun withMyFooter(
         footer: LoadStateAdapter<*>
