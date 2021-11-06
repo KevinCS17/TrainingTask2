@@ -2,10 +2,39 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/homeFragment2">
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/homeFragment2"
+        android:id="@+id/homeFragment"
         android:name="com.example.trainingtask2.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/navigateHomeToDetail"
+            app:destination="@id/detailFragment" >
+            <argument
+                android:name="cartoonName"
+                android:defaultValue="Name" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.trainingtask2.ui.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="Name" />
+        <argument
+            android:name="species"
+            app:argType="string"
+            android:defaultValue="Species" />
+        <argument
+            android:name="gender"
+            app:argType="string"
+            android:defaultValue="Gender" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+    </fragment>
 </navigation>

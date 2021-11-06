@@ -2,12 +2,18 @@ package com.example.trainingtask2.ui
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.trainingtask2.R
+import com.example.trainingtask2.constants.BundleConstants.KEY_GENDER
+import com.example.trainingtask2.constants.BundleConstants.KEY_IMAGE
+import com.example.trainingtask2.constants.BundleConstants.KEY_NAME
+import com.example.trainingtask2.constants.BundleConstants.KEY_SPECIES
+import com.example.trainingtask2.constants.BundleConstants.KEY_STATUS
+import com.example.trainingtask2.data.model.Result
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.flow.collectLatest
@@ -15,26 +21,14 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
-    companion object {
-        private const val MOTION_TRANSITION_COMPLETED = 1F
-        private const val MOTION_TRANSITION_INITIAL = 0F
-    }
-
-    // detect if scrolled
-    private var hasMotionScrolled = false
 
     var cartoonAdapter: CartoonAdapter = CartoonAdapter(this)
 
     private val viewModel: MainViewModel by viewModels()
 
-    private lateinit var rotate: Animation
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         initRecyclerView()
-
         gettingData()
 
     }
@@ -74,7 +68,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
         }
     }
 
-    override fun clicked(value: Long?) {
-//        Log.d("test123","testing masuk haha")
+    override fun clicked(position: Long?, item: Result?) {
+        val cartoonBundle = Bundle()
+        cartoonBundle.putString(KEY_NAME, item?.name ?: "")
+        cartoonBundle.putString(KEY_GENDER, item?.gender ?: "")
+        cartoonBundle.putString(KEY_SPECIES, item?.species ?: "")
+        cartoonBundle.putString(KEY_STATUS, item?.status ?: "")
+        cartoonBundle.putString(KEY_IMAGE, item?.image ?: "")
+        view?.findNavController()?.navigate(R.id.navigateHomeToDetail, cartoonBundle)
     }
 }

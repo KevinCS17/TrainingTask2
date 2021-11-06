@@ -1,6 +1,6 @@
 package com.example.trainingtask2.di
 
-import com.example.trainingtask2.ConstValue.BASE_URL
+import com.example.trainingtask2.constants.ConstValue.BASE_URL
 import com.example.trainingtask2.data.remote.ApiService
 import dagger.Module
 import dagger.Provides

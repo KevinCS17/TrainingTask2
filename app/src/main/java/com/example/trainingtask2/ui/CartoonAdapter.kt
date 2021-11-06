@@ -25,14 +25,14 @@ class CartoonAdapter @Inject constructor(private val listener: ClickListener):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.setOnClickListener {
-            listener.clicked(getItem(position)?.id)
+            listener.clicked(getItem(position)?.id, getItem(position))
             Log.d("test123", getItem(position)!!.id.toString())
         }
 
         Glide.with(holder.itemView)
             .load(getItem(position)?.image)
             .transform(RoundedCorners(30))
-            .into(holder.itemView.cartoon_poster)
+            .into(holder.itemView.cartoonImage)
 
         holder.itemView.cartoonName.text = getItem(position)?.name
     }
