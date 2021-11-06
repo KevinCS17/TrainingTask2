@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">TrainingTask2</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Cartoon Character</string>
+    <string name="cartoon_character">Cartoon Character</string>
+    <string name="name">Name</string>
+    <string name="error_message">Error message</string>
+    <string name="retry">Retry</string>
 </resources>

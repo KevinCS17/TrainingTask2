@@ -9,12 +9,10 @@ import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.trainingtask2.R
-import com.example.trainingtask2.data.model.CartoonModel
-import com.example.trainingtask2.data.model.CartoonResultModel
 import com.example.trainingtask2.data.model.Result
 import kotlinx.android.synthetic.main.cartoon_item.view.*
 import javax.inject.Inject
@@ -31,8 +29,12 @@ class CartoonAdapter @Inject constructor(private val listener: ClickListener):
             Log.d("test123", getItem(position)!!.id.toString())
         }
 
-        Glide.with(holder.itemView).load(getItem(position)?.image)
+        Glide.with(holder.itemView)
+            .load(getItem(position)?.image)
+            .transform(RoundedCorners(30))
             .into(holder.itemView.cartoon_poster)
+
+        holder.itemView.cartoonName.text = getItem(position)?.name
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
