@@ -5,9 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    android:layout_margin="4dp"
+    android:layout_margin="10dp"
     android:src="?attr/selectableItemBackground"
     app:cardCornerRadius="8dp"
+    android:layout_gravity="center"
     app:cardElevation="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,10 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintVertical_weight="1"
-            android:text="@string/name"
             android:textAlignment="center"
             android:gravity="center"
             android:textSize="18sp"
+            android:textColor="@color/dark_jungle_green"
+            android:layout_marginBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
