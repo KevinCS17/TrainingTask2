@@ -47,7 +47,7 @@ class CartoonAdapter @Inject constructor(private val listener: ClickListener):
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean =
-            oldItem == newItem
+            newItem == oldItem
     }
     fun withMyFooter(
         footer: LoadStateAdapter<*>
