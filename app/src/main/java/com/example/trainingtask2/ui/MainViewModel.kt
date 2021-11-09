@@ -1,6 +1,5 @@
 package com.example.trainingtask2.ui
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

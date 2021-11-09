@@ -1,5 +1,15 @@
 <resources>
-    <string name="app_name">TrainingTask2</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Cartoon Character</string>
+    <string name="cartoon_character">Cartoon Character</string>
+    <string name="name">Name</string>
+    <string name="error_message">Error message</string>
+    <string name="retry">Retry</string>
+    <string name="character_details">Character Details</string>
+    <string name="status">Status</string>
+    <string name="gender">Gender</string>
+    <string name="species">Species</string>
+    <string name="details_name_text"><![CDATA[ <b>Name : </b> %1$s]]></string>
+    <string name="details_gender_text"><![CDATA[ <b>Gender : </b> %1$s]]></string>
+    <string name="details_species_text"><![CDATA[ <b>Species : </b> %1$s]]></string>
+    <string name="details_status_text"><![CDATA[ <b>Status : </b> %1$s]]></string>
 </resources>
