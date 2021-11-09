@@ -26,7 +26,6 @@ class CartoonAdapter @Inject constructor(private val listener: ClickListener):
 
         holder.itemView.setOnClickListener {
             listener.clicked(getItem(position)?.id, getItem(position))
-            Log.d("test123", getItem(position)!!.id.toString())
         }
 
         Glide.with(holder.itemView)
