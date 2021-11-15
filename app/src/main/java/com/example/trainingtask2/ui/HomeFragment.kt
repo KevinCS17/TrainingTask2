@@ -33,6 +33,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
 
     }
 
+
     // getting data from net
     private fun gettingData() {
         lifecycleScope.launch {
