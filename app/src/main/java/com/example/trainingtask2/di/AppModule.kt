@@ -4,6 +4,7 @@ import com.example.trainingtask2.constants.ConstValue.BASE_URL
 import com.example.trainingtask2.constants.ConstValue.BASE_URL_LOGIN
 import com.example.trainingtask2.data.remote.ApiLogin
 import com.example.trainingtask2.data.remote.ApiService
+import com.example.trainingtask2.data.repository.LoginRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,4 +41,7 @@ object AppModule {
         .baseUrl(BASE_URL_LOGIN)
         .build()
         .create(ApiLogin::class.java)
+
+    @Provides
+    fun provideRepository(apiLogin:ApiLogin) = LoginRepository(apiLogin)
 }

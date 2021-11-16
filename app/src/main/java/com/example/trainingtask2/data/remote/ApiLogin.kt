@@ -10,5 +10,5 @@ interface ApiLogin {
     )
     @FormUrlEncoded
     @POST("user/login")
-    fun login(@Field("username") username:String, @Field("password") password:String): LoginModel
+    suspend fun login(@Field("username") username:String, @Field("password") password:String): LoginModel
 }

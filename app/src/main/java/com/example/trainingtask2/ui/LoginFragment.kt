@@ -6,13 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.trainingtask2.R
 import com.example.trainingtask2.data.remote.ApiLogin
 import com.example.trainingtask2.data.repository.LoginRepository
+import com.example.trainingtask2.data.repository.Resource
 import com.example.trainingtask2.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,12 +45,40 @@ class LoginFragment : Fragment(R.layout.fragment_login){
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener {
-            Log.d("test123",binding.etUsername.text.toString())
-            Log.d("test123",binding.etPassword.text.toString())
             val username: String = binding.etUsername.text.toString()
             val password: String = binding.etPassword.text.toString()
             viewModel.login(username,password)
+
+            //method1
+            lifecycleScope.launch{
+                viewModel.login(username,password).collect { response ->
+                    when(response){
+                        is Resource.Success->{
+                            Log.d("test123","Login Success ${response.Value}")
+                            Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Error->{
+                            Log.d("test123","Login Error!")
+                            Toast.makeText(requireContext(),"Login Error!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
         }
+
+        //method2
+//        viewModel.login.observe(viewLifecycleOwner, {response ->
+//            when(response){
+//                is Resource.Success->{
+//                    Log.d("test123","Login Success ${response.Value}")
+//                    Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
+//                }
+//                is Resource.Error->{
+//                    Log.d("test123","Login Error!")
+//                    Toast.makeText(requireContext(),"Login Error!", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        })
     }
 
     companion object {
