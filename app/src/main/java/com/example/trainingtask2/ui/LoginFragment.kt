@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.trainingtask2.R
 import com.example.trainingtask2.data.remote.ApiLogin
 import com.example.trainingtask2.data.repository.LoginRepository
@@ -49,36 +50,37 @@ class LoginFragment : Fragment(R.layout.fragment_login){
             val password: String = binding.etPassword.text.toString()
             viewModel.login(username,password)
 
-            //method1
-            lifecycleScope.launch{
-                viewModel.login(username,password).collect { response ->
-                    when(response){
-                        is Resource.Success->{
-                            Log.d("test123","Login Success ${response.Value}")
-                            Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
-                        }
-                        is Resource.Error->{
-                            Log.d("test123","Login Error!")
-                            Toast.makeText(requireContext(),"Login Error!", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
+//            //method1
+//            lifecycleScope.launch{
+//                viewModel.login(username,password).collect { response ->
+//                    when(response){
+//                        is Resource.Success->{
+//                            Log.d("test123","Login Success ${response.Value}")
+//                            Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
+//                        }
+//                        is Resource.Error->{
+//                            Log.d("test123","Login Error!")
+//                            Toast.makeText(requireContext(),"Login Error!", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
+//            }
         }
 
         //method2
-//        viewModel.login.observe(viewLifecycleOwner, {response ->
-//            when(response){
-//                is Resource.Success->{
-//                    Log.d("test123","Login Success ${response.Value}")
-//                    Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
-//                }
-//                is Resource.Error->{
-//                    Log.d("test123","Login Error!")
-//                    Toast.makeText(requireContext(),"Login Error!", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        })
+        viewModel.login.observe(viewLifecycleOwner, {response ->
+            when(response){
+                is Resource.Success->{
+                    view?.findNavController()?.navigate(R.id.navigateLoginToHome)
+                    Log.d("test123","Login Success ${response.Value}")
+                    Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Error->{
+                    Log.d("test123","Login Error!")
+                    Toast.makeText(requireContext(),"Login Error!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     companion object {

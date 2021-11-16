@@ -42,7 +42,7 @@
         android:name="com.example.trainingtask2.ui.LoginFragment"
         android:label="LoginFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
+            android:id="@+id/navigateLoginToHome"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

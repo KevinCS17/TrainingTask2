@@ -4,6 +4,8 @@ import com.example.trainingtask2.constants.ConstValue.BASE_URL
 import com.example.trainingtask2.constants.ConstValue.BASE_URL_LOGIN
 import com.example.trainingtask2.data.remote.ApiLogin
 import com.example.trainingtask2.data.remote.ApiService
+import com.example.trainingtask2.data.repository.CartoonDataSource
+import com.example.trainingtask2.data.repository.CartoonRepository
 import com.example.trainingtask2.data.repository.LoginRepository
 import dagger.Module
 import dagger.Provides
@@ -32,6 +34,9 @@ object AppModule {
         .baseUrl(BASE_URL)
         .build()
         .create(ApiService::class.java)
+
+    @Provides
+    fun provideCartoonRepository(apiService: ApiService) = CartoonRepository(apiService)
 
     @Provides
     @Singleton
