@@ -15,6 +15,9 @@
                 android:name="cartoonName"
                 android:defaultValue="Name" />
         </action>
+        <action
+            android:id="@+id/navigateHometoLogin"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"

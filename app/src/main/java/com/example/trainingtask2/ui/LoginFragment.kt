@@ -2,18 +2,16 @@ package com.example.trainingtask2.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.trainingtask2.R
-import com.example.trainingtask2.data.remote.ApiLogin
-import com.example.trainingtask2.data.repository.LoginRepository
 import com.example.trainingtask2.data.repository.Resource
 import com.example.trainingtask2.databinding.FragmentLoginBinding
 import com.example.trainingtask2.session.SessionManager

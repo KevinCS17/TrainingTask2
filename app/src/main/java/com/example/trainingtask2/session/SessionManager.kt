@@ -32,4 +32,8 @@ class SessionManager @Inject constructor(context: Context){
     fun getToken(): String {
         return sharedPreferences.getString(token,"")!!
     }
+
+    fun clear(){
+        sharedPreferencesEdit.clear()
+    }
 }
