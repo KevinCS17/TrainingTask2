@@ -21,15 +21,16 @@ import kotlinx.coroutines.flow.Flow
 class LoginViewModel @ViewModelInject constructor(private val loginRepository: LoginRepository):
     @androidx.hilt.lifecycle.ViewModelInject ViewModel(){
 
-    //method1
-//    fun login(username: String, password: String): Flow<Resource<LoginModel>> {
-//        return loginRepository.login(username, password)
-//    }
-    //method2
-    val login = MediatorLiveData<Resource<LoginModel>>()
-    fun login(username: String, password : String){
-        login.addSource(loginRepository.login(username, password).asLiveData()){
-            login.value = it
-        }
+//    method1
+    fun login(username: String, password: String): Flow<Resource<LoginModel>> {
+        return loginRepository.login(username, password)
     }
+
+//    //method2
+//    val login = MediatorLiveData<Resource<LoginModel>>()
+//    fun login(username: String, password : String){
+//        login.addSource(loginRepository.login(username, password).asLiveData()){
+//            login.value = it
+//        }
+//    }
 }
