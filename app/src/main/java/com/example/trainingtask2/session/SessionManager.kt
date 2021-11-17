@@ -9,7 +9,7 @@ import androidx.security.crypto.MasterKeys
 import com.example.trainingtask2.data.model.LoginModel
 import javax.inject.Inject
 
-class SessionManager @Inject constructor(){
+class SessionManager @Inject constructor(context: Context){
     val token = "SP_TOKEN"
     val keyGenParameterSpec :KeyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
     val mainKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
@@ -31,11 +31,5 @@ class SessionManager @Inject constructor(){
     @JvmName("getToken1")
     fun getToken(): String {
         return sharedPreferences.getString(token,"")!!
-    }
-
-
-    private lateinit var context: Context
-    fun setContext(con: Context) {
-        context=con
     }
 }

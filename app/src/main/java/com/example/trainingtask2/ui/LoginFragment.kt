@@ -60,9 +60,8 @@ class LoginFragment : Fragment(R.layout.fragment_login){
                     when(response){
                         is Resource.Success->{
                             view?.findNavController()?.navigate(R.id.navigateLoginToHome)
-//                            Log.d("test123","Login Success ${response.Value}")
                             sessionManager.setToken(response.Value.token)
-                            Log.d("test123","Login Success ${sessionManager.getToken()}")
+                            Log.d("test123","Login Success 2. ${sessionManager.getToken()}")
 //                            Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Error->{

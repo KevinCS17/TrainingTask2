@@ -56,5 +56,5 @@ object AppModule {
     fun provideRepository(apiLogin:ApiLogin) = LoginRepository(apiLogin)
 
     @Provides
-    fun provideSession(@ApplicationContext context: Context) = SessionManager().setContext(context)
+    fun provideSession(@ApplicationContext context: Context) = SessionManager(context)
 }

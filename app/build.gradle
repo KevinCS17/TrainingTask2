@@ -6,7 +6,7 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
 
@@ -17,7 +17,7 @@ android {
         }
         applicationId "com.example.trainingtask2"
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -116,9 +116,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
     implementation "androidx.security:security-crypto:1.0.0"
-
-    // For Identity Credential APIs
-    implementation "androidx.security:security-identity-credential:1.0.0-alpha03"
 
     // For App Authentication APIs
     implementation "androidx.security:security-app-authenticator:1.0.0-alpha02"
