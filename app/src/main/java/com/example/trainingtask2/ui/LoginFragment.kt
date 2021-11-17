@@ -18,18 +18,20 @@ import com.example.trainingtask2.data.repository.Resource
 import com.example.trainingtask2.databinding.FragmentLoginBinding
 import com.example.trainingtask2.session.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : Fragment(R.layout.fragment_login){
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private val viewModel: LoginViewModel by viewModels()
 
     private lateinit var binding: FragmentLoginBinding
 
-    @Inject lateinit var sessionManager: SessionManager
+    @Inject
+    lateinit var sessionManager: SessionManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +39,15 @@ class LoginFragment : Fragment(R.layout.fragment_login){
 
     }
 
+    fun isValid(): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(et_username.text).matches()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login, container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
         return binding.root
     }
@@ -50,26 +56,14 @@ class LoginFragment : Fragment(R.layout.fragment_login){
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener {
-            val username: String = binding.etUsername.text.toString()
-            val password: String = binding.etPassword.text.toString()
-            viewModel.login(username,password)
-
-            //method1
-            lifecycleScope.launch{
-                viewModel.login(username,password).collect { response ->
-                    when(response){
-                        is Resource.Success->{
-                            view?.findNavController()?.navigate(R.id.navigateLoginToHome)
-                            sessionManager.setToken(response.Value.token)
-                            Log.d("test123","Login Success 2. ${sessionManager.getToken()}")
-//                            Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
-                        }
-                        is Resource.Error->{
-                            Log.d("test123","Login Error!")
-                            Toast.makeText(requireContext(),"Login Error!", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+            if (isValid()) {
+                handleLogin()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Email not valid",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -87,6 +81,31 @@ class LoginFragment : Fragment(R.layout.fragment_login){
 //                }
 //            }
 //        })
+    }
+
+    fun handleLogin() {
+
+        val username: String = binding.etUsername.text.toString()
+        val password: String = binding.etPassword.text.toString()
+        viewModel.login(username, password)
+
+        //method1
+        lifecycleScope.launch {
+            viewModel.login(username, password).collect { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        view?.findNavController()?.navigate(R.id.navigateLoginToHome)
+                        sessionManager.setToken(response.Value.token)
+                        Log.d("test123", "Login Success 2. ${sessionManager.getToken()}")
+//                            Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Error -> {
+                        Log.d("test123", "Login Error!")
+                        Toast.makeText(requireContext(), "Login Error!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
     companion object {
