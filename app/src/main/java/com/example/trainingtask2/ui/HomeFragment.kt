@@ -2,8 +2,6 @@ package com.example.trainingtask2.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,7 +17,16 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import android.os.CountDownTimer
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.Button
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.*
+import androidx.navigation.NavController
+import com.example.trainingtask2.databinding.FragmentHomeBinding
 import com.example.trainingtask2.session.SessionManager
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
@@ -30,6 +37,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
 
     private val viewModel: MainViewModel by viewModels()
 
+    lateinit var homeFragmentBinding : FragmentHomeBinding
+
     @Inject
     lateinit var sessionManager: SessionManager
 
@@ -38,15 +47,33 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
 
         override fun onFinish() {
             //Logout
-            sessionManager.clear()
-            view?.findNavController()?.navigate(R.id.navigateHometoLogin)
+            logOut()
+//            sessionManager.clear()
+//            view?.findNavController()?.navigate(R.id.navigateHometoLogin)
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        homeFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+        return homeFragmentBinding.root
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         gettingData()
+        homeFragmentBinding.logOutButton.setOnClickListener {
+          logOut()
+        }
+    }
+
+    private fun logOut(){
+        sessionManager.clear()
+        view?.findNavController()?.navigate(R.id.navigateHometoLogin)
+
     }
 
     // getting data from net
