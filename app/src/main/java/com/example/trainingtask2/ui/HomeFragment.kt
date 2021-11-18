@@ -21,6 +21,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.*
 import androidx.navigation.NavController
@@ -65,6 +66,10 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         gettingData()
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner){
+            activity?.finish()
+        }
+
         homeFragmentBinding.logOutButton.setOnClickListener {
           logOut()
         }
@@ -72,7 +77,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
 
     private fun logOut(){
         sessionManager.clear()
-        view?.findNavController()?.navigate(R.id.navigateHometoLogin)
+        view?.findNavController()?.popBackStack()
+//        view?.findNavController()?.navigate(R.id.navigateHometoLogin)
 
     }
 
