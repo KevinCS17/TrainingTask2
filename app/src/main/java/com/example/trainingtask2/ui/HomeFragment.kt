@@ -19,8 +19,11 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import android.os.CountDownTimer
+import com.example.trainingtask2.IdleTimer
 import com.example.trainingtask2.session.SessionManager
 import javax.inject.Inject
+import android.text.format.DateUtils
+import com.example.trainingtask2.IdleTimer_Factory
 
 
 @AndroidEntryPoint
@@ -29,19 +32,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
     var cartoonAdapter: CartoonAdapter = CartoonAdapter(this)
 
     private val viewModel: MainViewModel by viewModels()
-
-    @Inject
-    lateinit var sessionManager: SessionManager
-
-    var timer: CountDownTimer = object : CountDownTimer(30 * 1000, 1000) {
-        override fun onTick(millisUntilFinished: Long) {}
-
-        override fun onFinish() {
-            //Logout
-            sessionManager.clear()
-            view?.findNavController()?.navigate(R.id.navigateHometoLogin)
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,13 +86,12 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
 
     override fun onResume() {
         super.onResume()
-        timer.start()
+        IdleTimer.timer.start()
     }
-
 
 
     override fun onPause() {
         super.onPause()
-        timer.cancel()
+        IdleTimer.timer.cancel()
     }
 }

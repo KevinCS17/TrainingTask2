@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="250dp"
     android:layout_margin="10dp"
-    android:src="?attr/selectableItemBackground"
+    android:src="?attr/cardBackgroundColor"
     app:cardCornerRadius="8dp"
     android:layout_gravity="center"
     app:cardElevation="6dp">
@@ -36,7 +36,6 @@
             android:textAlignment="center"
             android:gravity="center"
             android:textSize="18sp"
-            android:textColor="@color/dark_jungle_green"
             android:layout_marginBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

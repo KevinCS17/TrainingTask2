@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.example.trainingtask2.IdleTimer
 import com.example.trainingtask2.R
 import com.example.trainingtask2.data.repository.Resource
 import com.example.trainingtask2.databinding.FragmentLoginBinding
@@ -34,7 +35,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     fun isValid(): Boolean {
@@ -55,7 +55,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.btnLogin.setOnClickListener {
             if (isValid()) {
-                handleLogin()
+                handleLogin(it)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -81,7 +81,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 //        })
     }
 
-    fun handleLogin() {
+    fun handleLogin(view: View) {
 
         val username: String = binding.etUsername.text.toString()
         val password: String = binding.etPassword.text.toString()
@@ -92,21 +92,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             viewModel.login(username, password).collect { response ->
                 when (response) {
                     is Resource.Success -> {
-                        view?.findNavController()?.navigate(R.id.navigateLoginToHome)
+                        view.findNavController().navigate(R.id.navigateLoginToHome)
                         sessionManager.setToken(response.Value.token)
-                        Log.d("test123", "Login Success 2. ${sessionManager.getToken()}")
-//                            Toast.makeText(requireContext(),"Login Success ${response.Value}", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Error -> {
-                        Log.d("test123", "Login Error!")
-                        Toast.makeText(requireContext(), "Login Error!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Login Error", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-    }
-
-    companion object {
-
     }
 }
