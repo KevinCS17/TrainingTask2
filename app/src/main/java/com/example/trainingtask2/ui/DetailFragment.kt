@@ -10,6 +10,7 @@ import androidx.annotation.StringRes
 import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.trainingtask2.IdleTimer
 import com.example.trainingtask2.R
 import com.example.trainingtask2.constants.BundleConstants
 import kotlinx.android.synthetic.main.cartoon_item.view.*
@@ -21,6 +22,16 @@ import kotlinx.android.synthetic.main.fragment_detail.*
  * create an instance of this fragment.
  */
 class DetailFragment : Fragment(R.layout.fragment_detail) {
+
+    override fun onPause() {
+        super.onPause()
+        IdleTimer.timer.cancel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        IdleTimer.timer.start()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

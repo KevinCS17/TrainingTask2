@@ -25,6 +25,7 @@ import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.*
 import androidx.navigation.NavController
+import com.example.trainingtask2.IdleTimer
 import com.example.trainingtask2.databinding.FragmentHomeBinding
 import com.example.trainingtask2.session.SessionManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -129,13 +130,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),ClickListener {
 
     override fun onResume() {
         super.onResume()
-        timer.start()
+        IdleTimer.timer.start()
     }
 
 
 
     override fun onPause() {
         super.onPause()
-        timer.cancel()
+        IdleTimer.timer.cancel()
     }
 }

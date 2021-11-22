@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/aero_blue"
     tools:context=".ui.DetailFragment">
 
 
@@ -63,7 +62,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="@string/name"
-                    android:textColor="@color/dark_jungle_green"
                     android:textSize="18sp"/>
 
                 <TextView
@@ -72,7 +70,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="@string/gender"
-                    android:textColor="@color/dark_jungle_green"
                     android:textSize="18sp"/>
 
                 <TextView
@@ -81,7 +78,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="@string/species"
-                    android:textColor="@color/dark_jungle_green"
                     android:textSize="18sp"/>
 
                 <TextView
@@ -90,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="@string/status"
-                    android:textColor="@color/dark_jungle_green"
                     android:textSize="18sp"/>
             </LinearLayout>
 
