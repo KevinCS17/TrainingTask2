@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import com.example.trainingtask2.session.SessionManager
 import kotlin.concurrent.timer
 
-
 class IdleTimer @javax.inject.Inject constructor() : Service() {
     companion object {
         lateinit var timer: CountDownTimer
